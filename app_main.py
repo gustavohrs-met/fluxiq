@@ -1,8 +1,15 @@
 import streamlit as st
 import pandas as pd
+import sys # NOVO
+import os  # NOVO
 
-# --- Versão e Informações Globais ---
+# --- Versão e Informações Globais (NOVO) ---
 APP_VERSION = "V64.0"
+
+# --- Garantia de Caminho para Módulos Locais ---
+# Isso garante que Python encontre m_release e m_permeation
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+# ---------------------------------------------
 
 # --- Importa os módulos (Tratamento de Erro de Inicialização V53) ---
 try:
