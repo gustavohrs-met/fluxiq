@@ -1,0 +1,8 @@
+streamlit
+pandas
+numpy
+plotly
+scipy
+scikit-learn
+openpyxl # Necessário para ler/escrever arquivos .xlsx
+xlsxwriter # Necessário para o Pandas gerar arquivos .xlsx
