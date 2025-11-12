@@ -1,15 +1,23 @@
 import streamlit as st
 import pandas as pd
-import sys # NOVO
-import os  # NOVO
+import sys # Importar sys para manipular o caminho de busca (sys.path)
+import os  # Importar os para obter caminhos de arquivo
+import warnings
 
 # --- Versão e Informações Globais (NOVO) ---
 APP_VERSION = "V64.0"
 
-# --- Garantia de Caminho para Módulos Locais ---
-# Isso garante que Python encontre m_release e m_permeation
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+# --- CORREÇÃO ROBUSTA DE CAMINHO ---
+# Isso garante que a pasta raiz do repositório seja procurada primeiro, 
+# contornando problemas de importação no Streamlit Cloud.
+try:
+    path_root = os.path.dirname(os.path.abspath(__file__))
+    if path_root not in sys.path:
+        sys.path.insert(0, path_root)
+except Exception:
+    pass 
 # ---------------------------------------------
+
 
 # --- Importa os módulos (Tratamento de Erro de Inicialização V53) ---
 try:
@@ -17,7 +25,8 @@ try:
     from m_permeation import render_permeation_app 
     MODULES_LOADED = True
 except ImportError:
-    # Se a importação falhar, defina funções dummy para evitar falha no main()
+    # Se a importação falhar, defina funções dummy e exiba um erro crítico
+    st.error("ERRO CRÍTICO: Não foi possível carregar 'm_release.py' ou 'm_permeation.py'. Verifique se todos os arquivos estão na raiz do repositório.")
     def render_release_app(): pass
     def render_permeation_app(): pass
     MODULES_LOADED = False
@@ -106,7 +115,7 @@ def main():
     
     # Se os módulos não carregaram, pare aqui e exiba a mensagem
     if not MODULES_LOADED:
-        st.error("ERRO CRÍTICO: Não foi possível encontrar 'm_release.py' ou 'm_permeation.py'. Certifique-se de que todos os três arquivos estão na mesma pasta.")
+        # A mensagem de erro já foi exibida no bloco 'try'/'except'
         return
 
     # Inicializar estado da sessão (Deve ser o primeiro comando)
