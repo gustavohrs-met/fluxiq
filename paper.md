@@ -9,14 +9,14 @@ tags:
   - Franz cells
   - diffusion
 authors:
-  - name: F. V. Carvalho
-    orcid: 0000-0000-0000-0000 # (Opcional: Coloque seu ORCID se tiver)
+  - name: Fabiola Vieira Carvalho
+    orcid: 0000-0002-4450-0563
     affiliation: 1
   - name: G. H. Rodrigues da Silva
-    orcid: 0000-0000-0000-0000 # (Opcional)
+    orcid: 0000-0001-7377-8532
     affiliation: 1
 affiliations:
- - name: IMeT Group, Institution Name, Brazil # (Preencha o nome da Inst.)
+ - name: IMeT Group, Institution Name, Brazil
    index: 1
 date: 24 November 2025
 bibliography: paper.bib
